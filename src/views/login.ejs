@@ -9,6 +9,8 @@
           <h1 class="text-center">Criar conta ou Entrar</h1>
           <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
 
+          <%- include('includes/messages') %>
+
           <div class="row">
             <div class="col-lg">
               <h4 class="text-center">Faça seu cadastro</h4>
@@ -17,11 +19,11 @@
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="mb-3">
                   <label class="form-label">E-mail</label>
-                  <input type="email" class="form-control" name="email" placeholder="email@exemplo.com">
+                  <input type="email" class="form-control" name="email" placeholder="email@exemplo.com" >
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Senha</label>
-                  <input type="password" class="form-control" name="password" placeholder="Digite sua senha">
+                  <input type="password" class="form-control" name="password" placeholder="Digite sua senha" >
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Criar minha conta</button>

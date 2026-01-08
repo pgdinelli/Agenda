@@ -1,3 +1,3 @@
 exports.index = (req, res) => {
-    res.send('Contato Funcionando')
-}
+    res.render('contato');
+};

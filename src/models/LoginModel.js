@@ -35,7 +35,7 @@ class Login {
         // Validações
 
         // O e-mail precisa ser válido
-        if (!validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
+        if (!validator.isEmail(this.body.email)) this.errors.push('Precisa conter um e-mail válido.');
         // A senha precisa ter entre 6 e 50 caracteres
         if (this.body.password.length < 3 || this.body.password.length > 50)
             this.errors.push('A senha precisa ter entre 3 a 50 caracteres');

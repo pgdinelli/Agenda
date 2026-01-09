@@ -15,13 +15,20 @@ function Contato(body) {
     this.body = body;
     this.errors = [];
     this.contato = null;
-}
+};
 
 Contato.findById = async function(id) {
     if(typeof id !== 'string') return;
-    const user = await ContatoModel.findById(id);
-    return user;
-}
+    const contato = await ContatoModel.findById(id);
+    return contato;
+};
+
+Contato.findContatos = async function() {
+    
+    const contatos = await ContatoModel.find()
+        .sort( { creationDate: -1 });
+    return contatos;
+};
 
 Contato.prototype.register = async function () {
     this.valida();

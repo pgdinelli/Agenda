@@ -16,23 +16,27 @@
 
               <%- include('includes/messages') %>
 
-              <form action="/contato/register" method="POST">
+              <% if(contato._id) { %>
+              <form action="/contato/edit/<%= contato._id %>" method="POST">
+              <% } else { %>
+                <form action="/contato/register" method="POST">
+              <% } %>
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="mb-3">
                   <label class="form-label">Nome</label>
-                  <input type="text" class="form-control" name="name" placeholder="Nome do contato">
+                  <input value="<%= contato.name %>" type="text" class="form-control" name="name" placeholder="Nome do contato">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Sobrenome</label>
-                  <input type="text" class="form-control" name="secondName" placeholder="Sobrenome do contato">
+                  <input value="<%= contato.secondName %>" type="text" class="form-control" name="secondName" placeholder="Sobrenome do contato">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" class="form-control" name="email" placeholder="email@exemplo.com">
+                  <input value="<%= contato.email %>" type="email" class="form-control" name="email" placeholder="email@exemplo.com">
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Telefone</label>
-                  <input type="tel" class="form-control" name="tel" placeholder="(xx) xxxxx-xxxx">
+                  <input value="<%= contato.tel %>" type="tel" class="form-control" name="tel" placeholder="(xx) xxxxx-xxxx">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Salvar</button>

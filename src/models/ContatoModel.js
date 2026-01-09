@@ -17,23 +17,23 @@ function Contato(body) {
     this.contato = null;
 };
 
-Contato.findById = async function(id) {
-    if(typeof id !== 'string') return;
+Contato.findById = async function (id) {
+    if (typeof id !== 'string') return;
     const contato = await ContatoModel.findById(id);
     return contato;
 };
 
-Contato.findContatos = async function() {
-    
+Contato.findContatos = async function () {
+
     const contatos = await ContatoModel.find()
-        .sort( { creationDate: -1 });
+        .sort({ creationDate: -1 });
     return contatos;
 };
 
 Contato.prototype.register = async function () {
     this.valida();
 
-    if(this.errors.length > 0) return;
+    if (this.errors.length > 0) return;
     this.contato = await ContatoModel.create(this.body);
 };
 
@@ -50,24 +50,31 @@ Contato.prototype.cleanUp = function () {
         email: this.body.email,
         tel: this.body.tel
     }
-}
+};
 
 Contato.prototype.valida = function () {
     this.cleanUp();
 
     // Validações
     if (this.body.email && !validator.isEmail(this.body.email)) this.errors.push('Precisa conter um e-mail válido.');
-    if(!this.body.name) this.errors.push('Nome é um campo obrigatório.');
-    if(!this.body.email && !this.body.tel) {
+    if (!this.body.name) this.errors.push('Nome é um campo obrigatório.');
+    if (!this.body.email && !this.body.tel) {
         this.errors.push('Pelo menos um contato precisa ser enviado: e-mail ou telefone.');
     }
-}
+};
 
-Contato.prototype.edit = async function(id) {
-    if(typeof id !== 'string') return;
+Contato.prototype.edit = async function (id) {
+    if (typeof id !== 'string') return;
     this.valida();
-    if(this.errors.length > 0) return;
+    if (this.errors.length > 0) return;
     this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
-}
+};
+
+Contato.delete = async function (id) {
+    if(typeof id !== 'string') return;
+
+    const contato = await ContatoModel.findOneAndDelete({_id: id});
+    return contato;
+};
 
 module.exports = Contato;
